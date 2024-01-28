@@ -23,8 +23,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /* Listening port 4000 */ 
-app.listen(4000,() => {
-    console.log('The service has been started on 4000 port!');
+const port = process.env.PORT || 4000;
+app.listen(port,() => {
+    console.log('The service has been started on 8000 port!');
  })
 
 
