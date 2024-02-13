@@ -22,7 +22,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/* Listening port 4000 */ 
+/* Listening port 8000 */ 
 const port = process.env.PORT || 8000;
 app.listen(port,() => {
     console.log('The service has been started on 8000 port!');
@@ -54,7 +54,7 @@ async function saveOrder (document) {
 
 app.post('/order', (req,res) => {
     console.log(req.body);
-    saveOrder(req.body).then((data)=>{res.json({code:2,msg:'success',data:data})})
+    saveOrder(req.body).then((data)=>{res.json({code:1,msg:'success',data:data})})
 });
 
 async function updateNum (ids) {
