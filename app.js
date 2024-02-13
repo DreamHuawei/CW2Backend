@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /* Listening port 4000 */ 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 app.listen(port,() => {
     console.log('The service has been started on 8000 port!');
  })
@@ -54,7 +54,7 @@ async function saveOrder (document) {
 
 app.post('/order', (req,res) => {
     console.log(req.body);
-    saveOrder(req.body).then((data)=>{res.json({code:1,msg:'success',data:data})})
+    saveOrder(req.body).then((data)=>{res.json({code:2,msg:'success',data:data})})
 });
 
 async function updateNum (ids) {
@@ -88,8 +88,8 @@ async function search (keyWord) {
     await client.connect();
     const db = client.db("mobileApp");
     const collection = db.collection('product');
-    let result = await collection.find({$text:{$search: keyWord}}).toArray();
-    console.log(result)
+    console.log(keyWord)
+    let result = await collection.find({'title': {$regex: keyWord, $options: 'i'}}).toArray();
     return result;
 }
 app.get('/search', (req,res) => {
